@@ -1,0 +1,38 @@
+name: Render Markdown Pixel Logo
+
+on:
+  push:
+    paths:
+      - "logo.md"
+  pull_request:
+    paths:
+      - "logo.md"
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required so we can commit back
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          pip install pillow
+
+      - name: Render PNG from Markdown table
+        run: |
+          python md-to-png.py
+
+      - name: Commit updated PNG
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update preview.png from logo.md"
+          file_pattern: preview.png
