@@ -30,7 +30,7 @@ See the current progress here:
 
 and see the rendered preview here:
 
-👉 ![Logo preview](preview.png)
+👉 ![Logo preview](preview.png?)
 
 ## Tip
 
